@@ -17,7 +17,7 @@
 void electro_demo(void){
 	//Activation
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
-	printf("Electroaimant activénnnnnn\n");
+	printf("Electroaimant activé\n");
 	HAL_Delay(2000);
 
 	//Désactivation
