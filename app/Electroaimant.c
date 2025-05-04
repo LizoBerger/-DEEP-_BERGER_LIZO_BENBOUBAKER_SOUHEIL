@@ -13,10 +13,11 @@
 #include "stm32g4xx_hal.h"
 
 
+
 void electro_demo(void){
 	//Activation
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
-	printf("Electroaimant activé\n");
+	printf("Electroaimant activénnnnnn\n");
 	HAL_Delay(2000);
 
 	//Désactivation

@@ -14,7 +14,7 @@
 
 
 /* Includes ------------------------------------------------------------------*/
-#include "G431-MASTER/drivers/stm32g4xx_hal/Inc/stm32g4xx_hal.h"
+#include "stm32g4xx_hal.h"
 
 /* Defines -------------------------------------------------------------------*/
 #define LED_GREEN_PIN 		GPIO_PIN_8
