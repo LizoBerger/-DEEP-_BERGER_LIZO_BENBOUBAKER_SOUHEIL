@@ -46,7 +46,7 @@
 	#define USE_XPT2046			1
 	#define USE_FONT7x10		1
 	#define USE_FONT11x18		0
-	#define USE_FONT16x26		0
+	#define USE_FONT16x26		1
 #endif
 
 #define USE_EPAPER			0 // e-paper (�cran basse consommation)
@@ -106,7 +106,23 @@
 #define USE_TESTBOARD				0
 
 /*------------------Tests_Unitaires------------------*/
-#define USE_ILI9341_DEMO            0
-#define USE_ELECTROAIMANT_DEMO      0
+#define USE_TFT_TEST            	0
+#if USE_TFT_TEST
+	#define USE_ILI9341         	1
+#endif
+
+#define USE_ELECTROAIMANT_TEST      0
+
+#define USE_LIDAR_TEST          	1
+#if USE_LIDAR_TEST
+	#define USE_LD19         		1
+	#define USE_ILI9341			    1
+#endif
+
+#define USE_MOTEURS_TEST            0
+#if USE_MOTEURS_TEST
+	#define USE_MOTOR_DC            1
+#endif
+
 
 #endif /* CONFIG_H_ */

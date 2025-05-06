@@ -1,9 +1,9 @@
 /*
  ********************************************************************************
- * @file 	electroaimant.h
+ * @file 	test_tft.h
  * @author  LizoBerger/SouheilBenboubaker
  * @date 	May 03, 2025
- * @brief	Fichier .h de l'electroaimant
+ * @brief	Fichier .h du test de l'écran tft
  *******************************************************************************
  */
 
@@ -12,10 +12,10 @@
 
 #include "config.h"
 
-#if USE_ELECTROAIMANT_TEST
+#if USE_TFT_TEST
 #include "stm32g4xx_hal.h"
 
-void electro_test(void);
+void tft_test(void);
 
 #endif
 #endif

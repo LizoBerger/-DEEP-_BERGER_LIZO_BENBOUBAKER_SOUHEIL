@@ -16,7 +16,8 @@
 #include "stm32g4_utils.h"
 #include "tft_ili9341/stm32g4_ili9341.h"
 #include "tft_ili9341/stm32g4_fonts.h"
-
+#include "Electroaimant.h"
+#include "test_tft.h"
 
 #include <stdio.h>
 
@@ -86,18 +87,26 @@ int main(void)
     BSP_GPIO_pin_config(LED_GREEN_GPIO, LED_GREEN_PIN, GPIO_MODE_OUTPUT_PP,
                           GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH, GPIO_NO_AF);
 
-
-	#if USE_ILI9341_DEMO
-    ILI9341_demo(); // Initialisation de l'écran
-	#endif
-
-
-	#if USE_ELECTROAIMANT_DEMO
-    electro_demo();
-	#endif
-
+    BSP_GPIO_pin_config(GPIOB, GPIO_PIN_5, GPIO_MODE_OUTPUT_PP,
+                              GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH, GPIO_NO_AF);
     /* Hello student */
     printf("Hi <Student>, can you read me?\n");
+
+	#if USE_TFT_TEST
+    tft_test();
+	#endif
+
+	#if USE_ELECTROAIMANT_TEST
+    electro_test();
+	#endif
+
+	#if USE_LIDAR_TEST
+    LiDAR_test();
+	#endif
+
+	#if USE_MOTEURS_TEST
+    Moteurs_test();
+	#endif
 
     // heartbeat(); // Fonction heartbeat désactivée pour le test
 
