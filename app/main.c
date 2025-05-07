@@ -93,6 +93,11 @@ int main(void)
     /* Hello student */
     printf("Hi <Student>, can you read me?\n");
 
+    ILI9341_Init();
+
+    LD19_init();
+
+
 	#if USE_TFT_TEST
     tft_test();
 	#endif
@@ -107,13 +112,13 @@ int main(void)
 	#endif
 
     // heartbeat(); // Fonction heartbeat désactivée pour le test
-    LD19_init();
 
     /* Boucle infinie */
     while (1)
     {
 		#if USE_LIDAR_TEST
     	LiDAR_test();
+    	HAL_Delay(50);
 		#endif
 
 
