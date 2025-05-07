@@ -3,7 +3,7 @@
  * @file 	test_electroaimant.c
  * @author  LizoBerger/SouheilBenboubaker
  * @date 	May 03, 2025
- * @brief	Fichier .c du test de l'ï¿½lectroaimant
+ * @brief	Fichier .c du test de l'électroaimant
  *******************************************************************************
  */
 
@@ -18,12 +18,12 @@
 void electro_test(void){
 	//Activation
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
-	printf("Electroaimant activï¿½\n");
-	HAL_Delay(4000);
+	printf("Electroaimant activé\n");
+	HAL_Delay(2000);
 
-	//Dï¿½sactivation
+	//Désactivation
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET);
-	printf("Electroaimant dï¿½sactivï¿½");
+	printf("Electroaimant désactivé");c
 
 }
 
