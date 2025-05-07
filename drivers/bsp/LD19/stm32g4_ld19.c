@@ -68,6 +68,7 @@ void LD19_init(void)
  */
 void LD19_rx_callback(void)
 {
+	printf("Reçu");
 	static ld19_frame_handler_t frame_handler;
 	char c;
 	while(BSP_UART_data_ready(LD19_UART))
@@ -94,6 +95,7 @@ void LD19_rx_callback(void)
 
 void LD19_DEMO_process_main(void)
 {
+	printf('Je suis la');
 	if(flag_new_handler_available){
 		if(DISPLAY_ON_TFT)
 			BSP_LD19_display_on_tft(&last_frame_handler);

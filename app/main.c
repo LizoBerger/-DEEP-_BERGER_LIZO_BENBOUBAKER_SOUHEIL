@@ -18,6 +18,7 @@
 #include "tft_ili9341/stm32g4_fonts.h"
 #include "Electroaimant.h"
 #include "test_tft.h"
+#include "test_LiDAR.h"
 
 #include <stdio.h>
 
@@ -100,19 +101,20 @@ int main(void)
     electro_test();
 	#endif
 
-	#if USE_LIDAR_TEST
-    LiDAR_test();
-	#endif
 
 	#if USE_MOTEURS_TEST
     Moteurs_test();
 	#endif
 
     // heartbeat(); // Fonction heartbeat désactivée pour le test
+    LD19_init();
 
     /* Boucle infinie */
     while (1)
     {
+		#if USE_LIDAR_TEST
+    	LiDAR_test();
+		#endif
 
 
     }
