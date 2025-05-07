@@ -18,12 +18,12 @@
 void electro_test(void){
 	//Activation
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
-	printf("Electroaimant activï¿½\n");
+	printf("Electroaimant activé\n");
 	HAL_Delay(2000);
 
 	//Dï¿½sactivation
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET);
-	printf("Electroaimant dï¿½sactivï¿½");
+	printf("Electroaimant désactivé\n");
 
 }
 
