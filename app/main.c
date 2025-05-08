@@ -95,7 +95,9 @@ int main(void)
 
     ILI9341_Init();
 
+	#if USE_LIDAR_TEST
     LD19_init();
+	#endif
 
 
 	#if USE_TFT_TEST
@@ -113,6 +115,7 @@ int main(void)
 
     // heartbeat(); // Fonction heartbeat désactivée pour le test
 
+
     /* Boucle infinie */
     while (1)
     {
@@ -120,7 +123,6 @@ int main(void)
     	LiDAR_test();
     	HAL_Delay(50);
 		#endif
-
 
     }
 }

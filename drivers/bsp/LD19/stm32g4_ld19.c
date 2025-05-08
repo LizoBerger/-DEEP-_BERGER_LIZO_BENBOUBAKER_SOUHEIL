@@ -17,7 +17,7 @@
 #include "stdio.h"
 
 #ifndef LD19_UART
-	#define LD19_UART	UART2_ID
+	#define LD19_UART	UART1_ID
 #endif
 
 
@@ -58,7 +58,7 @@ static volatile bool flag_we_scratched_the_last_handler = false;
 
 void LD19_init(void)
 {
-	BSP_UART_init(LD19_UART, 115200);
+	BSP_UART_init(LD19_UART, 230400);
 	BSP_UART_set_callback(LD19_UART, &LD19_rx_callback);
 }
 
@@ -68,7 +68,6 @@ void LD19_init(void)
  */
 void LD19_rx_callback(void)
 {
-	printf('recu');
 	static ld19_frame_handler_t frame_handler;
 	char c;
 	while(BSP_UART_data_ready(LD19_UART))
@@ -80,7 +79,7 @@ void LD19_rx_callback(void)
 				if(flag_new_handler_available == false){
 					last_frame_handler = frame_handler;	//we copy the received frame
 					flag_new_handler_available = true;
-				}
+					printf("end_ok");				}
 				else
 				{
 					flag_we_scratched_the_last_handler = true;	//the process_main seems to be too slow to handle the last handle
@@ -88,6 +87,7 @@ void LD19_rx_callback(void)
 				break;
 			case END_ERROR:
 				flag_error_receiving_handler = true;
+				printf("end_error");
 				break;
 			case IN_PROGRESS:	//no break
 			default:
