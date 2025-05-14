@@ -121,7 +121,7 @@ int main(void)
     {
 		#if USE_LIDAR_TEST
     	LiDAR_test();
-    	HAL_Delay(50);
+    	//HAL_Delay(50);
 		#endif
 
     }
