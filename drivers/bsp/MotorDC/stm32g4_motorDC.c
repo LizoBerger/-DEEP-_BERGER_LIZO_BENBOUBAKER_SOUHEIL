@@ -120,12 +120,14 @@ void BSP_MOTOR_demo(void)
 	//Attention, cette fonction inclut cette boucle blocante (très pratique pour une démo, mais très crade pour votre application !)
 	while(1)
 	{
-		static int16_t duty = 0;
+		static int16_t duty = 500;
 
-		duty = (duty<=100)?duty+10:-100;		//duty augmente de 10 en 10 jusqu'à +100 et rejoint ensuite -100
+//		duty = (duty<=500)?duty+10:-500;		//duty augmente de 10 en 10 jusqu'à +100 et rejoint ensuite -100
+//		BSP_MOTOR_set_duty(left_motor_id, duty);
+//		BSP_MOTOR_set_duty(right_motor_id, -duty);
+		HAL_Delay(100);							//attente blocante : ne faites pas ceci dans vos projets... sauf pour des fonctions de tests / temporaires.
 		BSP_MOTOR_set_duty(left_motor_id, duty);
 		BSP_MOTOR_set_duty(right_motor_id, -duty);
-		HAL_Delay(100);							//attente blocante : ne faites pas ceci dans vos projets... sauf pour des fonctions de tests / temporaires.
 	}
 }
 

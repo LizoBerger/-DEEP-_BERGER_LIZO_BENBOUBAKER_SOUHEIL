@@ -19,6 +19,7 @@
 #include "Electroaimant.h"
 #include "test_tft.h"
 #include "test_LiDAR.h"
+#include "MotorDC/stm32g4_motorDC.h"
 
 #include <stdio.h>
 
@@ -74,10 +75,12 @@ int main(void)
     * Elle permet d'initialiser toutes les couches basses des drivers (Hardware Abstraction Layer),
     * condition préalable indispensable à l'exécution des lignes suivantes.
     */
-    HAL_Init();
+//    HAL_Init();	//already done in startup
+
+
 
     /* Initialisation des périphériques utilisés dans votre programme */
-    BSP_GPIO_enable();
+ //   BSP_GPIO_enable();
 
     BSP_UART_init(UART2_ID, 115200);
 
@@ -91,17 +94,9 @@ int main(void)
     BSP_GPIO_pin_config(GPIOB, GPIO_PIN_5, GPIO_MODE_OUTPUT_PP,
                               GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH, GPIO_NO_AF);
 
-    BSP_GPIO_pin_config(GPIOB, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP,
-                                  GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH, GPIO_NO_AF);
-
     BSP_GPIO_pin_config(GPIOB, GPIO_PIN_4, GPIO_MODE_OUTPUT_PP,
-                                  GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH, GPIO_NO_AF);
+                              GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH, GPIO_NO_AF);
 
-    BSP_GPIO_pin_config(GPIOB, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP,
-                                  GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH, GPIO_NO_AF);
-
-    BSP_GPIO_pin_config(GPIOA, GPIO_PIN_12, GPIO_MODE_OUTPUT_PP,
-                                  GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH, GPIO_NO_AF);
     /* Hello student */
     printf("Hi <Student>, can you read me?\n");
 

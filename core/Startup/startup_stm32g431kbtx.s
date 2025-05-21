@@ -107,8 +107,8 @@ LoopPaintStack:
 	str r3, [ip], #-4
 	cmp ip, r2
 	bne LoopPaintStack
-
-
+	bl HAL_Init
+	bl BSP_GPIO_enable
 /* Call the application's entry point.*/
 	bl	main
 

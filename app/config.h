@@ -119,7 +119,7 @@
 	#define USE_ILI9341			    1
 #endif
 
-#define USE_MOTEURS_TEST            1
+#define USE_MOTEURS_TEST            0
 #if USE_MOTEURS_TEST
 	#define USE_MOTOR_DC            1
 #endif
