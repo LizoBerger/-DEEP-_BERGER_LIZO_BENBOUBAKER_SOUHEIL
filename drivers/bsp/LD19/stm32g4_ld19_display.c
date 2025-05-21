@@ -188,7 +188,7 @@ coordinate_t LD19_find_coordinate(uint16_t d, uint16_t a){
 	int16_t cosinus, sinus;
 	uint16_t angle_rad_4096 = GEOMETRY_modulo_angle((int16_t)((uint32_t)a*183/256));
 	COS_SIN_4096_get(angle_rad_4096, &cosinus, &sinus);
-	coord.x = 160 + ((int32_t)cosinus * d * DISPLAY_SIZE) / (scale*100*4096);
+	coord.x = 160 + ((int32_t)cosinus * d * DISPLAY_SIZE) / (scale*100*4906);
 	coord.y = ((int32_t)sinus * d * DISPLAY_SIZE) / (scale*100*4096)  + 40;
 	//printf("Coordonnée: x->%d ; y->%d\n",coord.x,coord.y);
 	return coord;

@@ -90,6 +90,18 @@ int main(void)
 
     BSP_GPIO_pin_config(GPIOB, GPIO_PIN_5, GPIO_MODE_OUTPUT_PP,
                               GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH, GPIO_NO_AF);
+
+    BSP_GPIO_pin_config(GPIOB, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP,
+                                  GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH, GPIO_NO_AF);
+
+    BSP_GPIO_pin_config(GPIOB, GPIO_PIN_4, GPIO_MODE_OUTPUT_PP,
+                                  GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH, GPIO_NO_AF);
+
+    BSP_GPIO_pin_config(GPIOB, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP,
+                                  GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH, GPIO_NO_AF);
+
+    BSP_GPIO_pin_config(GPIOA, GPIO_PIN_12, GPIO_MODE_OUTPUT_PP,
+                                  GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH, GPIO_NO_AF);
     /* Hello student */
     printf("Hi <Student>, can you read me?\n");
 
@@ -121,7 +133,6 @@ int main(void)
     {
 		#if USE_LIDAR_TEST
     	LiDAR_test();
-    	//HAL_Delay(50);
 		#endif
 
     }

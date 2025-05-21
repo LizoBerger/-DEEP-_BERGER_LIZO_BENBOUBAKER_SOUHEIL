@@ -113,13 +113,13 @@
 
 #define USE_ELECTROAIMANT_TEST      0
 
-#define USE_LIDAR_TEST          	1
+#define USE_LIDAR_TEST          	0
 #if USE_LIDAR_TEST
 	#define USE_LD19         		1
 	#define USE_ILI9341			    1
 #endif
 
-#define USE_MOTEURS_TEST            0
+#define USE_MOTEURS_TEST            1
 #if USE_MOTEURS_TEST
 	#define USE_MOTOR_DC            1
 #endif

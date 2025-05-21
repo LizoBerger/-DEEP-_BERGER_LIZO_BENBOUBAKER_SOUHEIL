@@ -330,7 +330,7 @@ void BSP_TIMER_enable_PWM(timer_id_t timer_id, uint16_t TIM_CHANNEL_x, uint16_t 
     	switch(TIM_CHANNEL_x)
     	{
     		case TIM_CHANNEL_1: BSP_GPIO_pin_config((remap)?GPIOB:GPIOA,(remap)?GPIO_PIN_4:GPIO_PIN_6, 	GPIO_MODE_AF_PP, GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH, GPIO_AF2_TIM3); break;
-    		case TIM_CHANNEL_2: BSP_GPIO_pin_config(GPIOA, 				(remap)?GPIO_PIN_7:GPIO_PIN_4, 	GPIO_MODE_AF_PP, GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH, GPIO_AF2_TIM3); break;
+    		case TIM_CHANNEL_2: BSP_GPIO_pin_config((remap)?GPIOB:GPIOA,(remap)?GPIO_PIN_5:GPIO_PIN_4, 	GPIO_MODE_AF_PP, GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH, GPIO_AF2_TIM3); break;
     		case TIM_CHANNEL_3: BSP_GPIO_pin_config(GPIOB, 				GPIO_PIN_0, 					GPIO_MODE_AF_PP, GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH, GPIO_AF2_TIM3); break;
     		case TIM_CHANNEL_4: BSP_GPIO_pin_config(GPIOB, 				GPIO_PIN_7, 					GPIO_MODE_AF_PP, GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH, GPIO_AF2_TIM3); break;
     		default: break;
@@ -378,11 +378,13 @@ void BSP_TIMER_enable_PWM(timer_id_t timer_id, uint16_t TIM_CHANNEL_x, uint16_t 
  */
 void BSP_TIMER_set_duty(timer_id_t timer_id, uint16_t TIM_CHANNEL_x ,uint16_t duty)
 {
-	duty = MIN(duty, 1000);	// On s'assure que le duty cycle est compris entre 0 et 1000
-	duty = (uint16_t)((((uint32_t)(duty))*(structure_handles[timer_id].Init.Period+1))/1000U);
+	uint32_t duty32;
+	duty32 = MIN(duty, 1000); // On s'assure que le duty cycle est compris entre 0 et 1000
+	duty32 = ((((uint32_t)(duty32))*(structure_handles[timer_id].Init.Period+1))/1000U);
 
-	__HAL_TIM_SET_COMPARE(&structure_handles[timer_id], TIM_CHANNEL_x, duty);
+	__HAL_TIM_SET_COMPARE(&structure_handles[timer_id], TIM_CHANNEL_x, duty32);
 }
+
 
 /**
  * @brief Fonction de modification de la période de la PWM en conservant le rapport cyclique

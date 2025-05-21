@@ -77,18 +77,16 @@ void LD19_rx_callback(void)
 		{
 			case END_OK:
 				if(flag_new_handler_available == false){
+					//flag_we_scratched_the_last_handler = true;	//the process_main seems to be too slow to handle the last handler
 					last_frame_handler = frame_handler;	//we copy the received frame
 					flag_new_handler_available = true;
-					//printf("end_ok");
-					}
-				else
-				{
+				}
+				else{
 					flag_we_scratched_the_last_handler = true;	//the process_main seems to be too slow to handle the last handle
 				}
 				break;
 			case END_ERROR:
 				flag_error_receiving_handler = true;
-				//printf("end_error");
 				break;
 			case IN_PROGRESS:	//no break
 			default:
@@ -99,7 +97,6 @@ void LD19_rx_callback(void)
 
 void LD19_DEMO_process_main(void)
 {
-
 	if(flag_new_handler_available){
 		if(DISPLAY_ON_TFT)
 			BSP_LD19_display_on_tft(&last_frame_handler);

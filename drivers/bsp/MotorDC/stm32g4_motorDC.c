@@ -8,32 +8,32 @@
  */
 
 /*
- * Ce module logiciel est destiné au pilotage de moteur DC à travers un pont en H BD6221F-E2
- * 	(ou modèle similaire en terme de signaux de commande)
+ * Ce module logiciel est destinï¿½ au pilotage de moteur DC Ã  travers un pont en H BD6221F-E2
+ * 	(ou modÃ¨le similaire en terme de signaux de commande)
  *
- * Ce module utilise le pilote stm32f1_timer.h pour générer les signaux pwm.
+ * Ce module utilise le pilote stm32f1_timer.h pour gÃ©nÃ©rer les signaux pwm.
  *
- * Table de vérité des signaux de commande de ce pont en H BD6221 :
- * 	(lorsque l'entrée Vref est reliée à Vcc)
+ * Table de vÃ©ritÃ© des signaux de commande de ce pont en H BD6221 :
+ * 	(lorsque l'entrÃ©e Vref est reliÃ©e Ã  Vcc)
  *
  * 		Rin		Fin
  * 		0		0		moteur en roue libre
  * 		0		pwm		moteur en marche avant, 	vitesse proportionelle au rapport cyclique du signal pwm
- * 		pwm		0		moteur en marche arrière, 	vitesse proportionelle au rapport cyclique du signal pwm
+ * 		pwm		0		moteur en marche arriÃ¨re, 	vitesse proportionelle au rapport cyclique du signal pwm
  * 		1		1		moteur en court-circuit (freinage maximal)
  *
- * 		Pour un châssis mobile, et dans la majorité des fonctionnement, on utilise les 3 premières lignes de cette table de vérité.
- * 		Selon le signe de la variable "duty", ce module logiciel est donc conçu pour produire  :
+ * 		Pour un chÃ¢ssis mobile, et dans la majoritÃ© des fonctionnement, on utilise les 3 premiÃ¨res lignes de cette table de vÃ©ritÃ©.
+ * 		Selon le signe de la variable "duty", ce module logiciel est donc conÃ§u pour produire  :
  * 					-> une PWM vers une broche Fin, et un 0 logique vers la broche Rin
  * 			OU BIEN -> une PWM vers une broche Rin, et un 0 logique vers la broche Fin
  *
  *
- * Les ports utilisés par ce module logiciel sont imposés.
+ * Les ports utilisÃ©s par ce module logiciel sont imposÃ©s.
  * Il est possible de les changer en modifiant le contenu des fonctions MOTOR_init et MOTOR_set_duty.
  */
 
 /* Pour le module TB6612F-NG
- * Table de vérité des signaux de commande de ce pont en H TB6612F-NG
+ * Table de vÃ©ritÃ© des signaux de commande de ce pont en H TB6612F-NG
  * 	PWM 	AIN1	AIN2
  * 	1		0		1		moteur en sens horaire inverse
  *  1		1		0		moteur en sens horaire
@@ -41,24 +41,24 @@
  *  0 		x		x		moteur en court-circuit (freinage maximal) !!
  *  x		1		1		moteur en court-circuit (freinage maximal) !!
  *
- * Il ne faut donc pas utiliser la broche nommée "PWM" pour y envoyer un signal PWM... sinon on alterne avec un état court-circuit.
- * Pour cela, pour une rotation en sens horaire : on envoie un signal PWM sur AIN1 en maintenant AIN2 à 0 et PWM à 1.
- *            pour une rotation anti-hoaire     : on envoie un signal PWM sur AIN2 en maintenant AIN1 à 0 et PWM à 1.
+ * Il ne faut donc pas utiliser la broche nommÃ©e "PWM" pour y envoyer un signal PWM... sinon on alterne avec un Ã©tat court-circuit.
+ * Pour cela, pour une rotation en sens horaire : on envoie un signal PWM sur AIN1 en maintenant AIN2 Ã  0 et PWM Ã  1.
+ *            pour une rotation anti-horaire     : on envoie un signal PWM sur AIN2 en maintenant AIN1 Ã  0 et PWM Ã  1.
  *  Exemple fonctionnel de branchements pouvant servir de base :
  *  TB6612F-NG			STM32F103
- *  VM				--	5V ou toute tension "puissance" correspondant à la vitesse max du moteur
+ *  VM				--	5V ou toute tension "puissance" correspondant Ã  la vitesse max du moteur
  *  VCC				--  3.3V
- *  GND				--	GND (toutes les pins GND du module TB6612F-NG sont reliées entre elles)
+ *  GND				--	GND (toutes les pins GND du module TB6612F-NG sont reliÃ©es entre elles)
  * 	STBY			--	3.3V
  * 	PWMA			--  3.3V
  * 	AIN1			--	PB13 - par exemple... (pour sortir un signal PWM   ou bien   0)
  * 	AIN2			--	PA8  - par exemple... (pour sortir 0               ou bien   un signal PWM)
- * 	AO1 et AO2		--	Reliées aux broches du moteur
+ * 	AO1 et AO2		--	ReliÃ©es aux broches du moteur
  */
 
 /*
  *
- * Pour découvrir ce module logiciel, vous pouvez appeler en tâche de fond DEMO_MOTOR_statemachine(FALSE, UART_get_next_byte(UART2_ID));
+ * Pour dÃ©couvrir ce module logiciel, vous pouvez appeler en tÃ¢che de fond DEMO_MOTOR_statemachine(FALSE, UART_get_next_byte(UART2_ID));
  *
  * Les autres fonctions utiles sont :
  * 		MOTOR_add()
@@ -73,8 +73,8 @@
 #include <stdio.h>
 
 
-#define	PWM_PERIOD	50		//Période du signal PWM, en microsecondes
-							//[50us <=> 20kHz, fréquence humainement inaudible et électroniquement pas trop élevée]
+#define	PWM_PERIOD	50		//Pï¿½riode du signal PWM, en microsecondes
+							//[50us <=> 20kHz, frÃ©quence humainement inaudible et Ã©lectroniquement pas trop Ã©levÃ©e]
 
 typedef HAL_StatusTypeDef (*p_func_pwm)(TIM_HandleTypeDef * handler, uint32_t channel);	//Type pointeur sur fonction PWM
 
@@ -105,24 +105,24 @@ static running_t MOTOR_gpio_and_pin_to_pwm_channel(GPIO_TypeDef * gpio, uint16_t
 
 void BSP_MOTOR_demo(void)
 {
-	//cette démo montre un exemple d'utilisation de ce module logiciel.
-	//Pour consulter une autre démo, plus complète (et complexe... et belle), RDV dans la fonction MOTOR_demo_with_manual_drive
+	//cette dÃ©mo montre un exemple d'utilisation de ce module logiciel.
+	//Pour consulter une autre dÃ©mo, plus complÃ¨te (et complexe... et belle), RDV dans la fonction MOTOR_demo_with_manual_drive
 	static motor_id_e left_motor_id;
 	static motor_id_e right_motor_id;
 
 	//déclaration des moteurs, et initialisation des broches/périphériques correspondants.
-	left_motor_id = BSP_MOTOR_add(GPIOA, GPIO_PIN_8, GPIOA, GPIO_PIN_7);	//le choix des broches est stratégiques : elles doivent correspondre à des TIMERS !
-	right_motor_id = BSP_MOTOR_add(GPIOA, GPIO_PIN_9, GPIOA, GPIO_PIN_12);
+	right_motor_id = BSP_MOTOR_add(GPIOB, GPIO_PIN_4, GPIOB, GPIO_PIN_0);	//le choix des broches est stratégiques : elles doivent correspondre à des TIMERS !
+	left_motor_id = BSP_MOTOR_add(GPIOA, GPIO_PIN_12, GPIOB, GPIO_PIN_6);
 
 	if(left_motor_id == MOTOR_ID_NONE || right_motor_id == MOTOR_ID_NONE)
-		printf("un problème a eu lieu lors de l'initialisation du moteur, attrapez le débogueur et au boulot !\n");
+		printf("un probleme a eu lieu lors de l'initialisation du moteur, attrapez le debogueur et au boulot !\n");
 
-	//Attention, cette fonction inclut cette boucle blocante (très pratique pour une démo, mais très crade pour votre application !)
+	//Attention, cette fonction inclut cette boucle blocante (trÃ¨s pratique pour une dÃ©mo, mais trÃ¨s crade pour votre application !)
 	while(1)
 	{
 		static int16_t duty = 0;
 
-		duty = (duty>=100)?duty+10:-100;		//duty augmente de 10 en 10 jusqu'à +100 et rejoint ensuite -100
+		duty = (duty<=100)?duty+10:-100;		//duty augmente de 10 en 10 jusqu'Ã  +100 et rejoint ensuite -100
 		BSP_MOTOR_set_duty(left_motor_id, duty);
 		BSP_MOTOR_set_duty(right_motor_id, -duty);
 		HAL_Delay(100);							//attente blocante : ne faites pas ceci dans vos projets... sauf pour des fonctions de tests / temporaires.
@@ -131,9 +131,9 @@ void BSP_MOTOR_demo(void)
 
 
 /**
- * @brief 	Cette fonction est une machine a etat qui présente un exemple d'utilisation de ce module.
- * @param 	ask_for_finish : demande que la machine a état se termine.
- * @param	touch_pressed : caractère entré par l'utilisateur. NULL si aucun caractère.
+ * @brief 	Cette fonction est une machine a etat qui prÃ©sente un exemple d'utilisation de ce module.
+ * @param 	ask_for_finish : demande que la machine a Ã©tat se termine.
+ * @param	touch_pressed : caractÃ¨re entrÃ© par l'utilisateur. NULL si aucun caractÃ¨re.
  * @return	cette fonction retourne un element de l'enumeration running_t (END_OK= l'application est quittee avec succes ou IN_PROGRESS= l'application est toujours en cours)
  * @example DEMO_MOTOR_statemachine(false, UART_get_next_byte(UART2_ID));
  */
@@ -227,10 +227,10 @@ running_t BSP_MOTOR_demo_with_manual_drive (bool ask_for_finish, char touch_pres
 
 
 /**
- * @brief	Cette fonction doit être appelée pour chaque moteur.
+ * @brief	Cette fonction doit Ãªtre appelÃ©e pour chaque moteur.
  * @param : on doit founir pour chaque moteur le GPIO et la PIN pour les commandes forward et reverse.
  * @return 	cette fonction retourne MOTOR_ID_NONE si les broches fournies ne sont pas acceptable.
- * 			sinon, cette fonction retourne l'ID attribué à ce moteur. Conservez cet id pour l'utiliser ultérieurement (notamment pour mettre à jour la PWM !)
+ * 			sinon, cette fonction retourne l'ID attribuÃ© Ã  ce moteur. Conservez cet id pour l'utiliser ultÃ©rieurement (notamment pour mettre Ã  jour la PWM !)
  */
 motor_id_e BSP_MOTOR_add(GPIO_TypeDef * gpio_forward, uint16_t pin_forward, GPIO_TypeDef * gpio_reverse, uint16_t pin_reverse)
 {
@@ -239,7 +239,7 @@ motor_id_e BSP_MOTOR_add(GPIO_TypeDef * gpio_forward, uint16_t pin_forward, GPIO
 
 	for(motor_id_e id = 0; id<MOTOR_NB; id++)
 	{
-		if(motors[id].enable == false)	//si on a trouvé une case vide dans le tableau des motors... on la choisit !
+		if(motors[id].enable == false)	//si on a trouvï¿½ une case vide dans le tableau des motors... on la choisit !
 		{
 			debug_printf("Ajout du moteur %d\n", id);
 			ret = id;	//pour renvoyer l'id choisi.
@@ -259,7 +259,7 @@ motor_id_e BSP_MOTOR_add(GPIO_TypeDef * gpio_forward, uint16_t pin_forward, GPIO
 			}
 			else
 			{
-				debug_printf("échec d'initialisation des PWM liées au moteur demandé\n");
+				debug_printf("ï¿½chec d'initialisation des PWM liees au moteur demande\n");
 			}
 			break;
 		}
@@ -309,16 +309,17 @@ static running_t MOTOR_gpio_and_pin_to_pwm_channel(GPIO_TypeDef * gpio, uint16_t
 		{
 			case GPIO_PIN_0:	local_pwm_channel.timer_id = TIMER3_ID;	local_pwm_channel.tim_channel = TIM_CHANNEL_3;										break;
 			//case GPIO_PIN_3:	local_pwm_channel.timer_id = TIMER8_ID;	local_pwm_channel.tim_channel = TIM_CHANNEL_1;	local_pwm_channel.negative = true;	break;
-			case GPIO_PIN_4:	local_pwm_channel.timer_id = TIMER3_ID;	local_pwm_channel.tim_channel = TIM_CHANNEL_1;										break;
-			case GPIO_PIN_5:	local_pwm_channel.timer_id = TIMER3_ID;	local_pwm_channel.tim_channel = TIM_CHANNEL_2;										break;
-			case GPIO_PIN_6:	local_pwm_channel.timer_id = TIMER4_ID;	local_pwm_channel.tim_channel = TIM_CHANNEL_1;										break;
-			case GPIO_PIN_7:	local_pwm_channel.timer_id = TIMER4_ID;	local_pwm_channel.tim_channel = TIM_CHANNEL_2;										break;
+			case GPIO_PIN_4:	local_pwm_channel.timer_id = TIMER3_ID;	local_pwm_channel.tim_channel = TIM_CHANNEL_1;	local_pwm_channel.remap = true;		break;
+			case GPIO_PIN_5:	local_pwm_channel.timer_id = TIMER3_ID;	local_pwm_channel.tim_channel = TIM_CHANNEL_2;	local_pwm_channel.remap = true;		break;
+			case GPIO_PIN_6:	local_pwm_channel.timer_id = TIMER4_ID;	local_pwm_channel.tim_channel = TIM_CHANNEL_1;	local_pwm_channel.remap = true;		break;
+			case GPIO_PIN_7:	local_pwm_channel.timer_id = TIMER4_ID;	local_pwm_channel.tim_channel = TIM_CHANNEL_2;	local_pwm_channel.remap = true;		break;
+			case GPIO_PIN_8:	local_pwm_channel.timer_id = TIMER4_ID;	local_pwm_channel.tim_channel = TIM_CHANNEL_3;	local_pwm_channel.remap = true;		break;
 			default:
 				break;
 		}
 	}
 
-	if(local_pwm_channel.timer_id != TIMER_ID_NB)	//on a trouvé !
+	if(local_pwm_channel.timer_id != TIMER_ID_NB)	//on a trouvï¿½ !
 	{
 		local_pwm_channel.handler = BSP_TIMER_get_handler(local_pwm_channel.timer_id);
 		if(local_pwm_channel.negative)
@@ -337,7 +338,7 @@ static running_t MOTOR_gpio_and_pin_to_pwm_channel(GPIO_TypeDef * gpio, uint16_t
 	}
 	else
 	{
-		debug_printf("échec d'ajout du moteur. Avez vous renseigné une broche reliée à un timer ?!\n");
+		debug_printf("echec d'ajout du moteur. Avez vous renseigne une broche reliee a un timer ?!\n");
 	}
 
 	return ret;
@@ -345,14 +346,14 @@ static running_t MOTOR_gpio_and_pin_to_pwm_channel(GPIO_TypeDef * gpio, uint16_t
 
 
 /**
- * @param id: indiquer l'id du moteur à piloter.
- * @param duty : indiquer un rapport cyclique. Ce rapport peut être négatif pour un sens de rotation inversé ! intervalle : [-1000 ; 1000]
- * @pre   le moteur indiqué doit avoir été ajouté préalablement !
- * @post  la PWM sera mise à jour en conséquence. Attention, l'autre broche de ce moteur (reverse si duty>0 ; forward si duty <0) sera mise à 0 !
+ * @param id: indiquer l'id du moteur Ã  piloter.
+ * @param duty : indiquer un rapport cyclique. Ce rapport peut Ãªtre nÃ©gatif pour un sens de rotation inversÃ© ! intervalle : [-1000 ; 1000]
+ * @pre   le moteur indiquÃ© doit avoir Ã©tÃ© ajoutÃ© prÃ©alablement !
+ * @post  la PWM sera mise Ã  jour en consÃ©quence. Attention, l'autre broche de ce moteur (reverse si duty>0 ; forward si duty <0) sera mise Ã  0 !
  */
 void BSP_MOTOR_set_duty(motor_id_e id, int16_t duty)
 {
-	//Ecretage... Le rapport cyclique est exprimé dans la même unité que la PWM_PERIOD, il ne peut donc pas être plus grand !
+	//Ecretage... Le rapport cyclique est exprimÃ© dans la mÃªme unitÃ© que la PWM_PERIOD, il ne peut donc pas Ãªtre plus grand !
 	if(duty > 1000)
 		duty = 1000;
 	else if(duty < -1000)
@@ -361,13 +362,13 @@ void BSP_MOTOR_set_duty(motor_id_e id, int16_t duty)
 
 	if(motors[id].enable == false)
 	{
-		debug_printf("Vous cherchez à piloter un moteur qui n'a pas été ajouté !\n");
+		debug_printf("Vous cherchez a piloter un moteur qui n'a pas ete ajoute !\n");
 		return;
 	}
 
 	/*
 	 * Pour chaque moteur, on dispose de deux signaux PWM.
-	 * Selon le sens demandé, démarre et on arrête les broches correspondantes.
+	 * Selon le sens demandÃ©, dÃ©marre et on arrÃªte les broches correspondantes.
 	 */
 	if(duty < 0)
 	{
