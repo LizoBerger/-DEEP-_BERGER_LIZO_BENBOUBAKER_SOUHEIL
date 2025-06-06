@@ -63,7 +63,7 @@
 #define USE_MATRIX_KEYBOARD 0 // Clavier matriciel
 #define USE_HCSR04			0 // T�l�metre � ultrason
 #define USE_GPS				0 // GPS
-#define USE_LD19			0 // Lidar --> veuillez aussi activer USE_ILI9341, USE_XPT2046, USE_FONT7x10 et USE_FONT16x26 si vous voulez utiliser display_ld19.c
+#define USE_LD19			1 // Lidar --> veuillez aussi activer USE_ILI9341, USE_XPT2046, USE_FONT7x10 et USE_FONT16x26 si vous voulez utiliser display_ld19.c
 #define USE_NFC03A1			0 // Shield NFC
 #define USE_VL53L0			0 // T�l�metre laser de grande pr�cision
 #if USE_VL53L0

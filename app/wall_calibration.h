@@ -6,3 +6,14 @@
  * @brief	Fichier .h du calibrage x/y
  *******************************************************************************
  *
+ */
+
+#ifndef WALL_CALIBRATION_H
+#define WALL_CALIBRATION_H
+
+#include <stdint.h>
+#include "motor_dc.h"
+
+void WallCalibration_check_origin(float x, float y);
+
+#endif

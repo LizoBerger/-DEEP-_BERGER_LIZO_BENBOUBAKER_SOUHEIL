@@ -15,6 +15,7 @@
 #include "stm32g4_ld19_display.h"
 #include "stm32g4_uart.h"
 #include "stdio.h"
+#include "wall_calibration.h"
 
 #ifndef LD19_UART
 	#define LD19_UART	UART1_ID
@@ -102,6 +103,12 @@ void LD19_DEMO_process_main(void)
 			BSP_LD19_display_on_tft(&last_frame_handler);
 		else
 			display_handler_infos(&last_frame_handler);
+
+
+
+
+
+
 		flag_new_handler_available = false;
 	}
 
@@ -226,11 +233,11 @@ static running_t LD19_parse(char c, ld19_frame_handler_t * f){
 			break;
 		case CRC_CHECK:
 			if(c == f->crc){
-				//float angle_step;
-				//angle_step = (f->end_angle_rad - f->start_angle_rad);	//en principe, cet angle est positif, car le capteur augmente ses angles en sens horaire !
+				float angle_step;
+				angle_step = (f->end_angle_rad - f->start_angle_rad);	//en principe, cet angle est positif, car le capteur augmente ses angles en sens horaire !
 
 				if(f->start_angle < 18000 && f->start_angle > 00000){ // si start_angle appartient à l'intervale [10;170°]
-					/*
+
 					if(angle_step < 0) //on conditionne l'usage de GEOMETRY_modulo_angle_f au cas où le end_angle < start_angle
 					{
 						angle_step = GEOMETRY_modulo_angle(angle_step)/(12-1);
@@ -243,7 +250,6 @@ static running_t LD19_parse(char c, ld19_frame_handler_t * f){
 						for(uint8_t i = 0; i<POINT_PER_PACK; i++)
 							f->computed_angle_rad[i] =  (f->start_angle_rad + angle_step*i);
 					}
-					 */
 					ret = END_OK;
 				}
 			}
