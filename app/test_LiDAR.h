@@ -1,7 +1,7 @@
 /*
  ********************************************************************************
  * @file 	test_LiDAR.h
- * @author  Lizo Berger/Souheil Benboubaker
+ * @author  Lizo Berger
  * @date 	May 07, 2025
  * @brief	Fichier .h du test du LiDAR
  *******************************************************************************

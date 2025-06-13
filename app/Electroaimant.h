@@ -1,7 +1,7 @@
 /*
  ********************************************************************************
  * @file 	electroaimant.h
- * @author  Lizo Berger/Souheil Benboubaker
+ * @author  Souheil Benboubaker
  * @date 	May 03, 2025
  * @brief	Fichier .h de l'electroaimant
  *******************************************************************************

@@ -1,7 +1,7 @@
 /**
  *******************************************************************************
  * @file 	test_electroaimant.c
- * @author  Lizo Berger/Souheil Benboubaker
+ * @author  Souheil Benboubaker
  * @date 	May 03, 2025
  * @brief	Fichier .c du test de l'�lectroaimant
  *******************************************************************************

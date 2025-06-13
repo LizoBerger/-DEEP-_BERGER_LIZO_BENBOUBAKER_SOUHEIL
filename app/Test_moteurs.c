@@ -1,7 +1,7 @@
 /**
  *******************************************************************************
  * @file 	test_moteurs.c
- * @author  Lizo Berger/Souheil Benboubaker
+ * @author  Lizo Berger
  * @date 	May 03, 2025
  * @brief	Fichier .c du test des moteurs
  *******************************************************************************

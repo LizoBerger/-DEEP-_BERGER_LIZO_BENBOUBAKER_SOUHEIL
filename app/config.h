@@ -81,7 +81,7 @@
 #define USE_SD_CARD			0 // Carte SD pour lire/�crire des fichiers
 
 /*------------------Actionneurs------------------*/
-#define USE_MOTOR_DC		     0
+#define USE_MOTOR_DC		     1
 
 
 /*------------------P�riph�riques------------------*/

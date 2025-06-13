@@ -26,7 +26,7 @@
 
 
 
-// Déclaration des fonctions de test des moteurs
+// Declaration des fonctions de test des moteurs
 void motor_forward(void);
 void motor_reverse(void);
 void motor_stop(void);
