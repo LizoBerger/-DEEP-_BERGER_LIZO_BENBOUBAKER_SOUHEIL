@@ -1,7 +1,7 @@
 /*
  ********************************************************************************
  * @file 	motor_dc.h
- * @author  Lizo Berger / Revu par ChatGPT
+ * @author  Lizo Berger
  * @date 	June 06, 2025
  * @brief	Header des commandes moteur
  ********************************************************************************
@@ -15,7 +15,6 @@
 
 #if USE_MOTOR_DC
 
-// Fonctions de contrôle moteur simples pour compatibilité avec motion_control.c
 void Motor_Init(void);
 void Motor_Forward(void);
 void Motor_Backward(void);

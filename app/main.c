@@ -23,7 +23,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-// Machine à états
+
 typedef enum {
     STATE_WAIT_FOR_RUPTURE,
     STATE_MOVE_TO_OBJECT,
