@@ -1,7 +1,7 @@
 /**
  *******************************************************************************
  * @file 	test_tft.c
- * @author  LizoBerger/SouheilBenboubaker
+ * @author  LizoBerger
  * @date 	May 03, 2025
  * @brief	Fichier .c du test de l'écran tft
  *******************************************************************************

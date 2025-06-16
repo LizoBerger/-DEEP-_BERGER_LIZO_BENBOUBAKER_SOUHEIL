@@ -1,7 +1,7 @@
 /*
  ********************************************************************************
  * @file 	detect_object.h
- * @author  Lizo Berger/Souheil Benboubaker
+ * @author  Souheil Benboubaker
  * @date 	June 06, 2025
  * @brief	Fichier .h de la detection du pot
  *******************************************************************************

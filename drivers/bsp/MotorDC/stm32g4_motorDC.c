@@ -111,8 +111,8 @@ void BSP_MOTOR_demo(void)
 	static motor_id_e right_motor_id;
 
 	//déclaration des moteurs, et initialisation des broches/périphériques correspondants.
-	right_motor_id = BSP_MOTOR_add(GPIOB, GPIO_PIN_4, GPIOB, GPIO_PIN_0);	//le choix des broches est stratégiques : elles doivent correspondre à des TIMERS !
-	left_motor_id = BSP_MOTOR_add(GPIOA, GPIO_PIN_12, GPIOB, GPIO_PIN_6);
+	right_motor_id = BSP_MOTOR_add(GPIOA, GPIO_PIN_12, GPIOB, GPIO_PIN_6);	//le choix des broches est stratégiques : elles doivent correspondre à des TIMERS !
+	left_motor_id = BSP_MOTOR_add(GPIOB, GPIO_PIN_4, GPIOB, GPIO_PIN_0);
 
 	if(left_motor_id == MOTOR_ID_NONE || right_motor_id == MOTOR_ID_NONE)
 		printf("un probleme a eu lieu lors de l'initialisation du moteur, attrapez le debogueur et au boulot !\n");

@@ -1,7 +1,7 @@
 /*
  ********************************************************************************
  * @file 	test_moteurs.h
- * @author  LizoBerger/SouheilBenboubaker
+ * @author  LizoBerger
  * @date 	May 21, 2025
  * @brief	Fichier .h du test des moteurs
  *******************************************************************************
