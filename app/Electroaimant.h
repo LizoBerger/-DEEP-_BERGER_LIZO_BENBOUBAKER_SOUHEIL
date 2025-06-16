@@ -17,5 +17,7 @@
 
 void electro_test(void);
 
+void electroaimant_on(void);
+void electroaimant_off(void);
 #endif
 #endif

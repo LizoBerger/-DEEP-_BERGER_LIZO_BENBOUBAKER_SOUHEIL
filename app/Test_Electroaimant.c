@@ -1,4 +1,4 @@
-/**
+ /**
  *******************************************************************************
  * @file 	test_electroaimant.c
  * @author  Souheil Benboubaker
@@ -19,7 +19,7 @@ void electro_test(void){
 	//Activation
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
 	printf("Electroaimant activé\n");
-	HAL_Delay(2000);
+	HAL_Delay(20000);
 
 	//Dï¿½sactivation
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET);

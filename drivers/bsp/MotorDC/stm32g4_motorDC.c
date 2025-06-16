@@ -122,9 +122,9 @@ void BSP_MOTOR_demo(void)
 	{
 		static int16_t duty = 500;
 
-//		duty = (duty<=500)?duty+10:-500;		//duty augmente de 10 en 10 jusqu'à +100 et rejoint ensuite -100
-//		BSP_MOTOR_set_duty(left_motor_id, duty);
-//		BSP_MOTOR_set_duty(right_motor_id, -duty);
+		duty = (duty<=500)?duty+10:-500;		//duty augmente de 10 en 10 jusqu'à +100 et rejoint ensuite -100
+		BSP_MOTOR_set_duty(left_motor_id, duty);
+		BSP_MOTOR_set_duty(right_motor_id, -duty);
 		HAL_Delay(100);							//attente blocante : ne faites pas ceci dans vos projets... sauf pour des fonctions de tests / temporaires.
 		BSP_MOTOR_set_duty(left_motor_id, duty);
 		BSP_MOTOR_set_duty(right_motor_id, -duty);
@@ -134,7 +134,9 @@ void BSP_MOTOR_demo(void)
 
 /**
  * @brief 	Cette fonction est une machine a etat qui présente un exemple d'utilisation de ce module.
- * @param 	ask_for_finish : demande que la machine a état se termine.
+ * @param 	ask_for_finish : demande que la machinv hye
+ * lm(**f
+ *  a état se termine.
  * @param	touch_pressed : caractère entré par l'utilisateur. NULL si aucun caractère.
  * @return	cette fonction retourne un element de l'enumeration running_t (END_OK= l'application est quittee avec succes ou IN_PROGRESS= l'application est toujours en cours)
  * @example DEMO_MOTOR_statemachine(false, UART_get_next_byte(UART2_ID));

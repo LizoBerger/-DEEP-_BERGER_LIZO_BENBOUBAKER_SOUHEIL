@@ -15,7 +15,7 @@
 #include "stm32g4_ld19_display.h"
 #include "stm32g4_uart.h"
 #include "stdio.h"
-#include "wall_calibration.h"
+
 
 #ifndef LD19_UART
 	#define LD19_UART	UART1_ID
