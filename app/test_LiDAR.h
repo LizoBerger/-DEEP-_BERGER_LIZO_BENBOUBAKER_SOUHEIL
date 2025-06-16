@@ -14,7 +14,9 @@
 
 #if USE_LIDAR_TEST
 #include "stm32g4xx_hal.h"
-#include "stm32g4_ld19.h"
+#include "LD19/stm32g4_ld19.h"
+
+
 
 void LiDAR_test(void);
 

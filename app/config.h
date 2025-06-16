@@ -111,9 +111,9 @@
 	#define USE_ILI9341         	1
 #endif
 
-#define USE_ELECTROAIMANT_TEST      0
+#define USE_ELECTROAIMANT_TEST      1
 
-#define USE_LIDAR_TEST          	0
+#define USE_LIDAR_TEST          	1
 #if USE_LIDAR_TEST
 	#define USE_LD19         		1
 	#define USE_ILI9341			    1

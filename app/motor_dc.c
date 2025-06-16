@@ -49,20 +49,5 @@ void Motor_Stop(void) {
     Motor_Reset();
 }
 
-void Motor_Demo(void) {
-    Motor_Forward();
-    HAL_Delay(1000);
-
-    Motor_Backward();
-    HAL_Delay(1000);
-
-    Motor_Left();
-    HAL_Delay(1000);
-
-    Motor_Right();
-    HAL_Delay(1000);
-
-    Motor_Stop();
-}
 
 #endif

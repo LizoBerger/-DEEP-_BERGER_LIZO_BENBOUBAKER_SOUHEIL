@@ -111,8 +111,8 @@ void BSP_MOTOR_demo(void)
 	static motor_id_e right_motor_id;
 
 	//déclaration des moteurs, et initialisation des broches/périphériques correspondants.
-	right_motor_id = BSP_MOTOR_add(GPIOB, GPIO_PIN_4, GPIOB, GPIO_PIN_0);	//le choix des broches est stratégiques : elles doivent correspondre à des TIMERS !
-	left_motor_id = BSP_MOTOR_add(GPIOA, GPIO_PIN_12, GPIOB, GPIO_PIN_6);
+	right_motor_id = BSP_MOTOR_add(GPIOA, GPIO_PIN_12, GPIOB, GPIO_PIN_6);	//le choix des broches est stratégiques : elles doivent correspondre à des TIMERS !
+	left_motor_id = BSP_MOTOR_add(GPIOB, GPIO_PIN_4, GPIOB, GPIO_PIN_0);
 
 	if(left_motor_id == MOTOR_ID_NONE || right_motor_id == MOTOR_ID_NONE)
 		printf("un probleme a eu lieu lors de l'initialisation du moteur, attrapez le debogueur et au boulot !\n");
@@ -122,9 +122,9 @@ void BSP_MOTOR_demo(void)
 	{
 		static int16_t duty = 500;
 
-//		duty = (duty<=500)?duty+10:-500;		//duty augmente de 10 en 10 jusqu'Ã  +100 et rejoint ensuite -100
-//		BSP_MOTOR_set_duty(left_motor_id, duty);
-//		BSP_MOTOR_set_duty(right_motor_id, -duty);
+		duty = (duty<=500)?duty+10:-500;		//duty augmente de 10 en 10 jusqu'Ã  +100 et rejoint ensuite -100
+		BSP_MOTOR_set_duty(left_motor_id, duty);
+		BSP_MOTOR_set_duty(right_motor_id, -duty);
 		HAL_Delay(100);							//attente blocante : ne faites pas ceci dans vos projets... sauf pour des fonctions de tests / temporaires.
 		BSP_MOTOR_set_duty(left_motor_id, duty);
 		BSP_MOTOR_set_duty(right_motor_id, -duty);
@@ -134,7 +134,9 @@ void BSP_MOTOR_demo(void)
 
 /**
  * @brief 	Cette fonction est une machine a etat qui prÃ©sente un exemple d'utilisation de ce module.
- * @param 	ask_for_finish : demande que la machine a Ã©tat se termine.
+ * @param 	ask_for_finish : demande que la machinv hye
+ * lm(**f
+ *  a Ã©tat se termine.
  * @param	touch_pressed : caractÃ¨re entrÃ© par l'utilisateur. NULL si aucun caractÃ¨re.
  * @return	cette fonction retourne un element de l'enumeration running_t (END_OK= l'application est quittee avec succes ou IN_PROGRESS= l'application est toujours en cours)
  * @example DEMO_MOTOR_statemachine(false, UART_get_next_byte(UART2_ID));
